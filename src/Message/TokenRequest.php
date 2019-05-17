@@ -11,9 +11,9 @@ class TokenRequest extends AbstractRequest
     {
         $this->setGrantType("client_credentials");
         return [
-            'grant_type' => $this->getGrantType(),
-            'client_id' => $this->getClientId(),
-            'client_secret' => $this->getClientSecret()
+            'client_id'     => $this->getClientId(),
+            'client_secret' => $this->getClientSecret(),
+            'grant_type'    => $this->getGrantType(),
         ];
     }
 
@@ -21,10 +21,11 @@ class TokenRequest extends AbstractRequest
     {
         $url = $this->getEndpoint();
         $headers = [
-           'headers' => ['Content-Type' => 'x-www-form-urlencoded; charset=UTF-8', 'Accept' => 'application/json']
+            'Content-Type' => 'application/x-www-form-urlencoded'
         ];
-        $httpResponse = $this->httpClient->post($url, $headers, $data)->send();
-        return $this->createResponse($httpResponse->json());
+        $httpResponse = $this->httpClient->request('POST', $url, $headers, http_build_query($data, '', '&'));
+
+        return ($this->createResponse(json_decode($httpResponse->getBody()->getContents())));
     }
 
     protected function getEndpoint()

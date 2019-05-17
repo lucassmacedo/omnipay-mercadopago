@@ -6,7 +6,7 @@ use Omnipay\Common\Message\AbstractResponse;
 
 use Omnipay\Common\Message\RedirectResponseInterface;
 
-class PurchaseResponse extends AbstractResponse  implements RedirectResponseInterface
+class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {
     public function isSuccessful()
     {
@@ -19,7 +19,7 @@ class PurchaseResponse extends AbstractResponse  implements RedirectResponseInte
      */
     public function isRedirect()
     {
-        return isset($this->data['init_point']) && $this->data['init_point'];
+        return isset($this->data->init_point) && $this->data->init_point;
     }
 
 
@@ -27,7 +27,7 @@ class PurchaseResponse extends AbstractResponse  implements RedirectResponseInte
     {
         return 'GET';
     }
-    
+
     public function getRedirectData()
     {
         return null;
@@ -36,7 +36,7 @@ class PurchaseResponse extends AbstractResponse  implements RedirectResponseInte
     public function getRedirectUrl()
     {
         if ($this->isRedirect()) {
-            return $this->data['init_point'];
+            return $this->data->init_point;
         }
     }
 }

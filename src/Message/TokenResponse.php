@@ -8,8 +8,14 @@ class TokenResponse extends AbstractResponse
 {
     public function isSuccessful()
     {
-        return isset($this->data['status']) && in_array($this->data['status'], array('Success', 'SuccessWithWarning'));
+        return isset($this->data->access_token);
     }
+
+    public function getToken()
+    {
+        return $this->data->access_token;
+    }
+
 }
 
 ?>

@@ -16,7 +16,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function sendData($data)
     {
         $url = $this->getEndpoint() . '?access_token=' . $this->getAccessToken();
-        $httpRequest = $this->httpClient->createRequest(
+        $httpRequest = $this->httpClient->request(
             'POST',
             $url,
             array(
@@ -24,8 +24,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             ),
             $this->toJSON($data)
         );
-        $httpResponse = $httpRequest->send();
-        return $this->createResponse($httpResponse->json());
+
+        return $this->createResponse(json_decode($httpRequest->getBody()->getContents()));
     }
 
     public function setExternalReference($value)
@@ -46,6 +46,27 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function getAccessToken()
     {
         return $this->getParameter('access_token');
+    }
+
+    /**
+     * Get Customer Data
+     *
+     * @return array customer data
+     */
+    public function getCustomer()
+    {
+        return $this->getParameter('customer');
+    }
+
+    /**
+     * Set Customer data
+     *
+     * @param array $value
+     * @return AbstractRequest provides a fluent interface.
+     */
+    public function setCustomer($value)
+    {
+        return $this->setParameter('customer', $value);
     }
 
     protected function getEndpoint()
