@@ -36,7 +36,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     public function getRedirectUrl()
     {
         if ($this->isRedirect()) {
-            return $this->data->init_point;
+            return $this->getRequest()->getTestMode() ? $this->data->init_point : $this->data->sandbox_init_point;
         }
     }
 }
