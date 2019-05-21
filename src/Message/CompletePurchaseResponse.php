@@ -2,6 +2,7 @@
 
 namespace Omnipay\MercadoPago\Message;
 
+use Carbon\Carbon;
 use Omnipay\Common\Message\AbstractResponse;
 
 /**
@@ -15,7 +16,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return isset($this->data['status']) && $this->data['status'] == 'approved';
+        return isset($this->data->status);
     }
 
     /**
@@ -35,6 +36,18 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function getTransactionReference()
     {
-        return $this->data['order_id'];
+
+        return $this->data->id;
+    }
+
+    /**
+     * The transaction reference obtained from the purchase()
+     *
+     * @return string
+     */
+
+    public function getTransactionDate()
+    {
+        return $this->isSuccessful() ? $this->data->date_created : null;
     }
 }

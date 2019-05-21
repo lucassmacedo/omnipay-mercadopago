@@ -69,6 +69,7 @@ class PurchaseRequest extends AbstractRequest
 
     protected function getEndpoint()
     {
+
         return $this->getTestMode() ? ($this->testEndpoint . '/checkout/preferences') : ($this->liveEndpoint . '/checkout/preferences');
     }
 

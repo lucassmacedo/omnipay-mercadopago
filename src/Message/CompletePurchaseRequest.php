@@ -4,26 +4,27 @@ namespace Omnipay\MercadoPago\Message;
 
 class CompletePurchaseRequest extends AbstractRequest
 {
-    protected $liveEndpoint = 'https://api.mercadopago.com/collections/notifications/';
+    protected $liveEndpoint = 'https://api.mercadopago.com/merchant_orders/';
     /** @var this option is unavailable */
-    protected $testEndpoint = 'https://api.mercadolibre.com/sandbox/collections/notifications/';
+    protected $testEndpoint = 'https://api.mercadopago.com/merchant_orders/';
 
 
     public function getData()
     {
         //get information about collection
-        $id = $this->httpRequest->query->get('collection_id');
+        $id = $this->httpRequest->query->get('merchant_order_id');
         $url = $this->getEndpoint() . "$id?access_token=" . $this->getAccessToken();
-        $httpRequest = $this->httpClient->createRequest(
+
+        $httpRequest = $this->httpClient->request(
             'GET',
             $url,
             array(
                 'Content-type' => 'application/json',
             )
         );
-        $httpResponse = $httpRequest->send();
-        $response = $httpResponse->json();
-        return isset($response['collection']) ? $response['collection'] : null;
+        $response = json_decode($httpRequest->getBody()->getContents());
+
+        return isset($response) ? $response : null;
     }
 
     public function sendData($data)
