@@ -52,6 +52,16 @@ class Gateway extends AbstractGateway
         return $this->getParameter('access_token');
     }
 
+    public function setNotificationUrl($value)
+    {
+        return $this->setParameter('notification_url', $value);
+    }
+
+    public function getNotificationUrl()
+    {
+        return $this->getParameter('notification_url');
+    }
+
     public function setExternalReference($value)
     {
         return $this->setParameter('external_reference', $value);
@@ -80,5 +90,3 @@ class Gateway extends AbstractGateway
     }
 
 }
-
-?>

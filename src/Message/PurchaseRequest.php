@@ -46,10 +46,7 @@ class PurchaseRequest extends AbstractRequest
         $purchaseObject = [
             'items'              => $items,
             'external_reference' => $external_reference,
-            'auto_return'        => 'approved',
-            'back_urls'          => [
-                'success' => $this->getReturnUrl()
-            ],
+            'notification_url'          => $this->getNotificationUrl(),
             //TODO add option for that
             'payment_methods'    => [
                 'excluded_payment_types' => [
