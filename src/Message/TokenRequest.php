@@ -69,5 +69,3 @@ class TokenRequest extends AbstractRequest
     }
 
 }
-
-?>

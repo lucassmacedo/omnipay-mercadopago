@@ -40,5 +40,3 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         }
     }
 }
-
-?>

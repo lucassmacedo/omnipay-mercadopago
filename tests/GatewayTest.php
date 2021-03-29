@@ -35,5 +35,3 @@ class GatewayTest extends GatewayTestCase
         $this->assertTrue($data['init_point'] != null);
     }
 }
-
-?>

@@ -26,5 +26,3 @@ class Item extends BaseItem
         return $this->setParameter('currency_id', $value);
     }
 }
-
-?>

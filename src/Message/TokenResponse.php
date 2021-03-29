@@ -17,5 +17,3 @@ class TokenResponse extends AbstractResponse
     }
 
 }
-
-?>
